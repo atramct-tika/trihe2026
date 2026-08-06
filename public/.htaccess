@@ -42,8 +42,8 @@ RewriteRule ^wp-(admin|login\.php|content|includes|json)(/|$) - [G,L]
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
   Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'none'; frame-ancestors 'self'; form-action 'self'; base-uri 'self'"
-  # HSTS: activar solo cuando el certificado lleve un tiempo estable
-  # Header always set Strict-Transport-Security "max-age=31536000"
+  # HSTS activado el 2026-08-06 (certificado y https+www verificados en producción)
+  Header always set Strict-Transport-Security "max-age=31536000"
 </IfModule>
 
 # ── Compresión ───────────────────────────────────────────────
