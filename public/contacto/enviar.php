@@ -38,7 +38,7 @@ if (!in_array($abogada, ['', 'Conchi Herrero', 'Mercedes Jiménez'], true)) {
     $abogada = '';
 }
 
-$emailValido = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+$emailValido = $email === '' || filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 $telefonoValido = strlen(preg_replace('/\D/', '', $telefono)) >= 9;
 if ($nombre === '' || $mensaje === '' || !$emailValido || !$consent
     || !$telefonoValido
@@ -56,7 +56,7 @@ $cuerpo = "Consulta desde www.trihe.es\n"
         . "----------------------------------------\n"
         . "Nombre:   {$nombreLimpio}\n"
         . "Teléfono: " . str_replace(["\r", "\n"], ' ', $telefono) . "\n"
-        . "Email:    {$email}\n"
+        . "Email:    " . ($email !== '' ? $email : '(no indicado)') . "\n"
         . "Asunto:   " . ($asunto !== '' ? $asunto : '(sin indicar)') . "\n"
         . ($abogada !== '' ? "Cita con: {$abogada}\n" : '')
         . ($viviendas !== '' ? "Viviendas: {$viviendas}\n" : '')
@@ -66,7 +66,7 @@ $cuerpo = "Consulta desde www.trihe.es\n"
 
 $asunto = '=?UTF-8?B?' . base64_encode("Consulta web de {$nombreLimpio}") . '?=';
 $cabeceras = "From: TRIHE Web <no-reply@trihe.es>\r\n"
-           . "Reply-To: {$email}\r\n"
+           . ($email !== '' ? "Reply-To: {$email}\r\n" : '')
            . "Content-Type: text/plain; charset=UTF-8\r\n"
            . "Content-Transfer-Encoding: 8bit";
 
