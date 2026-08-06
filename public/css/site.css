@@ -487,7 +487,36 @@ strong { font-weight: 600; }
   padding-block: var(--space-2xs);
   font-size: var(--text-sm); margin: 0;
 }
-.checklist svg { flex: none; margin-top: 0.2rem; color: var(--color-accent); }
+/* accent-deep, no accent: las marcas transmiten información y necesitan ≥3:1 (WCAG 1.4.11) */
+.checklist svg { flex: none; margin-top: 0.2rem; color: var(--color-accent-deep); }
+
+/* sello de credenciales (señal de autoridad) */
+.credential {
+  display: flex; align-items: flex-start; gap: var(--space-sm);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-card);
+  padding: var(--space-sm) var(--space-md);
+  margin-block: var(--space-lg);
+  font-size: var(--text-sm);
+}
+.credential svg { flex: none; margin-top: 0.15rem; color: var(--color-accent-deep); }
+.credential span { flex: 1 1 0; min-width: 0; }
+.credential b { font-family: var(--font-display); font-weight: 500; font-size: var(--text-md); color: var(--color-ink-strong); }
+.credential span { color: var(--color-ink-2); }
+
+/* llamada intermedia en páginas largas */
+.midcta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--space-sm);
+  border-top: var(--rule-hair); border-bottom: var(--rule-hair);
+  padding-block: var(--space-md);
+  margin-block: var(--space-lg);
+}
+.midcta p {
+  margin: 0; max-width: 42ch;
+  font-family: var(--font-display); font-size: var(--text-lg);
+  color: var(--color-ink-strong);
+}
 
 /* señales en mini-tarjetas */
 .signals {
