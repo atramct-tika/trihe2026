@@ -428,6 +428,97 @@ strong { font-weight: 600; }
 .infocard__row dd { margin: var(--space-3xs) 0 0; }
 .infocard__row .muted { color: var(--color-ink-2); }
 
+/* ── componentes de página pilar (cambiar-de-administrador) ── */
+.pilar-hero { position: relative; border-bottom: var(--rule-hair); overflow: clip; }
+.pilar-hero .hero__bg { position: absolute; inset: 0; opacity: 0.7; }
+.pilar-hero .hero__fade { position: absolute; inset: 0;
+  background: linear-gradient(to bottom, oklch(98.3% 0.005 85 / 0.6), oklch(98.3% 0.005 85 / 0.9), var(--color-paper)); }
+.pilar-hero__inner { position: relative; padding-block: var(--space-2xl) var(--space-2xl); max-width: var(--measure); }
+.pilar-hero__rule { height: 1px; width: 6rem; border: 0; margin: var(--space-md) 0; background: var(--color-accent); }
+.pilar-hero h1 { font-size: var(--text-display-s); }
+.pilar-hero p { color: var(--color-ink-2); font-size: var(--text-lg); }
+
+/* panel oscuro con el dato clave */
+.law { padding-block: var(--space-2xl); }
+.law__panel {
+  background: var(--color-dark); color: var(--color-dark-ink);
+  padding: var(--space-lg);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.law__panel p { color: oklch(98.3% 0.005 85 / 0.75); font-size: var(--text-sm); margin: 0; }
+.law__panel p.law__big {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: var(--text-display-s); line-height: 1.15;
+  color: var(--color-dark-ink);
+  margin: 0 0 var(--space-sm);
+  max-width: 18ch;
+  overflow-wrap: anywhere; min-width: 0;
+}
+.law__big b { color: var(--color-accent); font-weight: 500; }
+
+/* pasos numerados */
+.steps {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-block: var(--space-md) var(--space-lg);
+}
+.step {
+  border: var(--rule-hair); background: var(--color-card);
+  padding: var(--space-md);
+}
+.step__num {
+  font-family: var(--font-display); font-size: var(--text-2xl);
+  color: var(--color-accent); line-height: 1;
+  display: block; margin-bottom: var(--space-2xs);
+}
+.step b { font-family: var(--font-display); font-weight: 500; font-size: var(--text-lg); color: var(--color-ink-strong); }
+.step p { font-size: var(--text-sm); color: var(--color-ink-2); margin: var(--space-3xs) 0 0; }
+
+/* checklist con marcas */
+.checklist {
+  list-style: none; padding: 0;
+  margin: var(--space-md) 0 var(--space-lg);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2xs) var(--space-lg);
+}
+.checklist li {
+  display: flex; gap: var(--space-2xs); align-items: flex-start;
+  border-bottom: var(--rule-hair);
+  padding-block: var(--space-2xs);
+  font-size: var(--text-sm); margin: 0;
+}
+.checklist svg { flex: none; margin-top: 0.2rem; color: var(--color-accent); }
+
+/* señales en mini-tarjetas */
+.signals {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-block: var(--space-md) var(--space-lg);
+}
+.signals div { border-top: 2px solid var(--color-accent); padding-top: var(--space-2xs); }
+.signals p { font-size: var(--text-sm); color: var(--color-ink-2); margin: 0; }
+
+/* FAQ en acordeones nativos */
+.faq { border-top: var(--rule-hair); }
+.faq:last-of-type { border-bottom: var(--rule-hair); }
+.faq summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm);
+  font-family: var(--font-display); font-weight: 500; font-size: var(--text-lg);
+  color: var(--color-ink-strong);
+  padding-block: var(--space-sm);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  flex: none;
+  font-family: var(--font-body); font-weight: 400; font-size: var(--text-xl);
+  color: var(--color-accent-deep);
+  transition: transform var(--dur-short) var(--ease-out);
+}
+.faq[open] summary::after { transform: rotate(45deg); }
+.faq p { padding-bottom: var(--space-sm); margin: 0; color: var(--color-ink-2); }
+
 /* ── widget WhatsApp tipo chat (sin JS: details/summary) ── */
 .wachat {
   position: fixed; right: var(--space-sm); bottom: var(--space-sm);
@@ -547,6 +638,7 @@ strong { font-weight: 600; }
   .hero__inner { padding-block: var(--space-xl) var(--space-2xl); }
   .cards, .values { padding-block: var(--space-xl); }
   .arealist li { grid-template-columns: minmax(0, 1fr); gap: var(--space-3xs); }
+  .steps, .checklist, .signals { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {
