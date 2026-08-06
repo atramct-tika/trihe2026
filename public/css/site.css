@@ -428,9 +428,60 @@ strong { font-weight: 600; }
 .infocard__row dd { margin: var(--space-3xs) 0 0; }
 .infocard__row .muted { color: var(--color-ink-2); }
 
+/* ── widget WhatsApp tipo chat (sin JS: details/summary) ── */
+.wachat {
+  position: fixed; right: var(--space-sm); bottom: var(--space-sm);
+  z-index: 45;
+}
+.wachat summary {
+  list-style: none;
+  display: flex; align-items: center; justify-content: center;
+  width: 3.25rem; height: 3.25rem; border-radius: 50%;
+  background: var(--color-accent-deep); color: var(--color-accent-ink);
+  cursor: pointer;
+  box-shadow: 0 10px 25px -12px oklch(0% 0 0 / 0.5);
+  transition: background var(--dur-short) var(--ease-out);
+}
+.wachat summary::-webkit-details-marker { display: none; }
+.wachat summary:hover { background: var(--color-dark); }
+.wachat[open] summary { background: var(--color-dark); }
+.wachat__panel {
+  position: absolute; right: 0; bottom: 4.25rem;
+  width: min(19rem, calc(100vw - 2rem));
+  background: var(--color-card);
+  border: var(--rule-hair);
+  box-shadow: 0 20px 50px -25px oklch(0% 0 0 / 0.4);
+}
+.wachat__head {
+  margin: 0;
+  background: var(--color-dark); color: var(--color-dark-ink);
+  font-weight: 600; font-size: var(--text-sm);
+  padding: var(--space-xs) var(--space-sm);
+}
+.wachat__msg {
+  margin: 0;
+  font-size: var(--text-sm); color: var(--color-ink-2);
+  padding: var(--space-sm) var(--space-sm) var(--space-2xs);
+}
+.wachat__opt {
+  display: block;
+  margin: var(--space-2xs) var(--space-sm);
+  border: 1px solid var(--color-input);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--text-sm); font-weight: 600;
+  text-decoration: none; color: var(--color-ink);
+  transition: border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+}
+.wachat__opt:hover { border-color: var(--color-accent-deep); color: var(--color-accent-deep); }
+.wachat__note {
+  margin: 0;
+  font-size: var(--text-xs); color: var(--color-ink-2);
+  padding: var(--space-2xs) var(--space-sm) var(--space-sm);
+}
+
 /* ── botones flotantes (solo móvil, del prototipo) ── */
 .floaties {
-  position: fixed; right: var(--space-sm); bottom: var(--space-sm);
+  position: fixed; right: var(--space-sm); bottom: 5rem;
   z-index: 40;
   display: flex; flex-direction: column; gap: var(--space-xs);
 }
@@ -488,7 +539,7 @@ strong { font-weight: 600; }
 @media (max-width: 48rem) {
   .site-head__bar { justify-content: center; }
   /* P12 · los botones flotantes no deben tapar el cierre del footer */
-  .footer__bar p { padding-bottom: calc(var(--space-md) + 7rem); }
+  .footer__bar p { padding-bottom: calc(var(--space-md) + 9.5rem); }
   .cards, .values, .duo, .chips__row, .footer__cols {
     grid-template-columns: minmax(0, 1fr);
   }
