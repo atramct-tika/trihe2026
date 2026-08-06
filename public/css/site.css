@@ -372,6 +372,12 @@ strong { font-weight: 600; }
   transition: border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
 }
 .chip:hover { border-color: var(--color-ink-2); }
+.chip__role {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  margin-top: var(--space-3xs);
+}
 .chip input {
   position: static; width: 0; height: 0; opacity: 0; margin: 0; padding: 0; border: 0;
 }
