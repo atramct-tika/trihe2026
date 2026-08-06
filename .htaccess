@@ -1,0 +1,68 @@
+# ─────────────────────────────────────────────────────────────
+# TRIHE · www.trihe.es — Apache compartido (cdmon)
+# ─────────────────────────────────────────────────────────────
+
+AddDefaultCharset UTF-8
+Options -Indexes
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+
+# ── Canónico: HTTPS + www ────────────────────────────────────
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^www\.trihe\.es$ [NC]
+RewriteCond %{HTTP_HOST} !^$
+RewriteRule ^(.*)$ https://www.trihe.es/$1 [R=301,L]
+
+# ── Redirecciones 301 del WordPress antiguo ──────────────────
+# Duplicados ?page_id= (enlazados desde el slider antiguo)
+RewriteCond %{QUERY_STRING} (^|&)page_id=59($|&)
+RewriteRule ^$ /abogadas/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)page_id=65($|&)
+RewriteRule ^$ /administracion-de-fincas/? [R=301,L]
+# Cualquier otro ?page_id= o ?p= → portada
+RewriteCond %{QUERY_STRING} (^|&)(page_id|p|cat)=\d+($|&)
+RewriteRule ^$ /? [R=301,L]
+
+# Feeds RSS del WordPress antiguo → portada
+RewriteRule ^feed/?$ / [R=301,L]
+RewriteRule ^(.+)/feed/?$ /$1/ [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)feed=
+RewriteRule ^$ /? [R=301,L]
+
+# Restos de WordPress: ya no existen (410 Gone, no 404)
+RewriteRule ^xmlrpc\.php$ - [G,L]
+RewriteRule ^wp-(admin|login\.php|content|includes|json)(/|$) - [G,L]
+
+# ── Cabeceras de seguridad ───────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'none'; frame-ancestors 'self'; form-action 'self'; base-uri 'self'"
+  # HSTS: activar solo cuando el certificado lleve un tiempo estable
+  # Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+# ── Compresión ───────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+# ── Caché ────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  <FilesMatch "\.(woff2|png|svg|ico)$">
+    Header set Cache-Control "max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/xml "access plus 1 day"
+</IfModule>

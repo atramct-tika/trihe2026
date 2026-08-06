@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /contacto/gracias/
+Disallow: /contacto/error/
+
+Sitemap: https://www.trihe.es/sitemap.xml
