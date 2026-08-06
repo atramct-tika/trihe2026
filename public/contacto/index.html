@@ -96,8 +96,8 @@
             <label for="nombre">Nombre y apellidos</label>
           </div>
           <div class="ffield">
-            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder=" ">
-            <label for="telefono">Teléfono (opcional)</label>
+            <input type="tel" id="telefono" name="telefono" required autocomplete="tel" placeholder=" ">
+            <label for="telefono">Teléfono de contacto</label>
           </div>
           <div class="ffield">
             <input type="email" id="email" name="email" required autocomplete="email" placeholder=" ">
@@ -108,6 +108,13 @@
             <div class="chips__row">
               <label class="chip"><input type="radio" name="asunto" value="Abogadas">Abogadas</label>
               <label class="chip"><input type="radio" name="asunto" value="Administración de Fincas">Administración de Fincas</label>
+            </div>
+          </fieldset>
+          <fieldset class="chips chips--abogada">
+            <legend>¿Con quién prefiere la cita? (opcional)</legend>
+            <div class="chips__row">
+              <label class="chip"><input type="radio" name="abogada" value="Conchi Herrero">Conchi Herrero</label>
+              <label class="chip"><input type="radio" name="abogada" value="Mercedes Jiménez">Mercedes Jiménez</label>
             </div>
           </fieldset>
           <div class="ffield ffield--viviendas">

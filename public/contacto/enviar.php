@@ -33,8 +33,15 @@ if (!in_array($asunto, ['', 'Abogadas', 'Administración de Fincas'], true)) {
     $asunto = '';
 }
 
+$abogada = trim((string)($_POST['abogada'] ?? ''));
+if (!in_array($abogada, ['', 'Conchi Herrero', 'Mercedes Jiménez'], true)) {
+    $abogada = '';
+}
+
 $emailValido = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+$telefonoValido = strlen(preg_replace('/\D/', '', $telefono)) >= 9;
 if ($nombre === '' || $mensaje === '' || !$emailValido || !$consent
+    || !$telefonoValido
     || mb_strlen($nombre) > 200 || mb_strlen($telefono) > 40
     || mb_strlen($mensaje) > 5000) {
     http_response_code(400);
@@ -51,6 +58,7 @@ $cuerpo = "Consulta desde www.trihe.es\n"
         . "Teléfono: " . str_replace(["\r", "\n"], ' ', $telefono) . "\n"
         . "Email:    {$email}\n"
         . "Asunto:   " . ($asunto !== '' ? $asunto : '(sin indicar)') . "\n"
+        . ($abogada !== '' ? "Cita con: {$abogada}\n" : '')
         . ($viviendas !== '' ? "Viviendas: {$viviendas}\n" : '')
         . "Fecha:    " . date('d/m/Y H:i') . "\n"
         . "----------------------------------------\n\n"

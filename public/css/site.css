@@ -380,8 +380,11 @@ strong { font-weight: 600; }
 /* P10 · nº de viviendas: visible solo si Asunto = Administración de Fincas.
    Con navegadores sin :has() el campo queda siempre visible (degradación honesta). */
 @supports selector(:has(*)) {
-  .ffield--viviendas { display: none; }
+  .ffield--viviendas, .chips--abogada { display: none; }
   .form:has(.chips input[value="Administración de Fincas"]:checked) .ffield--viviendas {
+    display: block;
+  }
+  .form:has(.chips input[value="Abogadas"]:checked) .chips--abogada {
     display: block;
   }
 }
